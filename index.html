@@ -43,7 +43,7 @@
       v=til(64)
       p=parse(k.textContent)
       c.textContent=k.textContent
-      til(100).map(()=>(eval(p)))
+      til(100).map((x,i)=>setTimeout(()=>eval(p),100*i))
     </script>
   </body>
 </html>
