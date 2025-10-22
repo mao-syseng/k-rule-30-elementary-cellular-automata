@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./favicon.ico" />
+    <title>k rule 30</title>
+    <style>
+      * {
+        font-family: monospace;
+        font-size: large;
+        color: #222323;
+        background: #f0f6f0;
+      }
+      @media (prefers-color-scheme: dark) {
+        * {
+          color: #f0f6f0;
+          background: #222323;
+        }
+      }
+      fieldset {
+        width: fit-content;
+      }
+      #r {
+        font-size: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <fieldset>
+      <legend>rule 30 cellular automata in jtye/k</legend>
+      <pre id="e"></pre>
+    </fieldset>
+    <fieldset><legend>src</legend><pre id="c"></pre>
+    <a href="https://mao-syseng.github.io/k-playground/">learn more</a></fieldset>
+    <script src="./k.js"></script>
+    <script id="k" type="text/k">
+      l:1_v,@v                                            / left version of v, take first element and add it to the end, then remove first element.
+      r:|1_(|v),@(|v)                                     / my very efficient way to calculate right: reverse left, then do left operation again and reverse it back.
+      v:mod[2;l+v|r]                                      / combine the 1's from right and normal generation and add left, then modulo 2 to make numbers above 1 go back to 0
+      e.textContent:e.textContent , "\n" , ("  ";"# ")v   / render the generation and add new line
+    </script>
+    <script>
+      v=til(64)
+      p=parse(k.textContent)
+      c.textContent=k.textContent
+      til(100).map(()=>(eval(p)))
+    </script>
+  </body>
+</html>
